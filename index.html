@@ -4,60 +4,147 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Advtage • DM tools for tabletop sessions</title>
-  <meta name="description" content="The 100% free, ad-free Windows DM app for D&amp;D 5.5e. Zero hosting fees—players join instantly via peer-to-peer web link while campaign files stay on your machine." />
+  <meta name="description" content="The 100% free, ad-free Windows DM app for D&amp;D 5.5e. Zero hosting fees — players join instantly via peer-to-peer web link while campaign files stay on your machine." />
+  <meta property="og:title" content="Advtage — Run the session. Share a link. Keep playing." />
+  <meta property="og:description" content="Free, ad-free Windows DM app for D&amp;D 5.5e. Players join via peer-to-peer web link; campaign files stay on your machine." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/adv-die.png" />
   <link rel="icon" href="assets/adv-small.png" type="image/png" />
+  <link rel="preload" as="image" href="assets/adv-die.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page">
-    <header class="site-header">
-      <a class="brand" href="https://github.com/dylan-griffin/advtage-releases/releases/latest" target="_blank" rel="noopener noreferrer" aria-label="Advtage latest release">
-        <img class="brand-mark" src="assets/adv-die.png" alt="Advtage logo" width="40" height="40" />
-        <img class="brand-text" src="assets/adv-text.png" alt="Advtage" height="28" />
+  <a class="skip-link" href="#download-btn">Skip to download</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="https://github.com/dylan-griffin/advtage-releases/releases/latest" target="_blank" rel="noopener noreferrer" aria-label="Advtage — latest release">
+        <img class="brand__mark" src="assets/adv-die.png" alt="Advtage d20 logo" width="36" height="36" />
+        <img class="brand__word" src="assets/adv-text.png" alt="Advtage" height="22" />
       </a>
-      <nav class="site-nav" aria-label="Primary">
+      <nav class="topbar__nav" aria-label="Primary">
         <a href="https://github.com/dylan-griffin/advtage-releases/releases" target="_blank" rel="noopener noreferrer">Releases</a>
         <a href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Ko-fi</a>
         <a href="https://discord.gg/P9cmzxJrYT" target="_blank" rel="noopener noreferrer">Discord</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <section class="hero">
-      <p class="eyebrow">ADVTAGE VTT • D&amp;D 5.5e</p>
-      <h1>Run the session. Share a link. Keep playing.</h1>
-      <p class="lede">
-        The 100% free, ad-free Windows DM app for D&amp;D 5.5e. Zero hosting fees—players join instantly via peer-to-peer web link while campaign files stay on your machine.
-      </p>
-      <div class="cta-row">
-        <a class="btn primary" id="download-btn" href="https://github.com/dylan-griffin/advtage-releases/releases/latest">
-          Download for Windows
-        </a>
-        <a class="btn secondary" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="kicker">ADVTAGE VTT <span class="kicker__dot">•</span> D&amp;D 5.5e</p>
+          <h1 id="hero-title" class="hero__title">Run the session.<br />Share a link.<br /><span class="hero__title-accent">Keep playing.</span></h1>
+          <p class="hero__lede">
+            The <strong>100% free, ad-free</strong> Windows DM app for D&amp;D 5.5e. Zero hosting
+            fees — players join instantly via a peer-to-peer web link while your campaign files
+            stay on your machine.
+          </p>
+
+          <div class="cta">
+            <a class="btn btn--primary" id="download-btn" href="https://github.com/dylan-griffin/advtage-releases/releases/latest">
+              Download for Windows
+            </a>
+            <a class="btn btn--ghost" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">
+              Support on Ko-fi
+            </a>
+          </div>
+
+          <p class="meta meta--version" id="version-line">Fetching latest version…</p>
+          <p class="meta meta--fine">Per-user installer <span class="sep">•</span> No admin required <span class="sep">•</span> Open-access binaries</p>
+        </div>
+
+        <div class="hero__art" aria-hidden="true">
+          <div class="hero__halo"></div>
+          <svg class="hero__ring" viewBox="0 0 400 400" role="presentation" focusable="false">
+            <circle cx="200" cy="200" r="178" />
+            <circle cx="200" cy="200" r="150" class="hero__ring-dashed" />
+            <circle cx="200" cy="200" r="120" />
+          </svg>
+          <img class="hero__die" src="assets/adv-die.png" alt="" width="420" height="420" />
+        </div>
       </div>
-      <p class="version" id="version-line">Fetching latest version…</p>
-      <p class="fineprint">Per-user installer • No admin required • Open-access binaries</p>
-    </section>
 
-    <section class="card links-hub">
-      <h2>Links</h2>
-      <ul class="links links-row" id="social-links-social">
-        <li><a href="https://www.youtube.com/@advtagevtt" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-        <li><a href="https://www.instagram.com/advtagevtt" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="https://x.com/AdvtageVTT" target="_blank" rel="noopener noreferrer">X</a></li>
-        <li><a href="https://www.tiktok.com/@advtagevtt" target="_blank" rel="noopener noreferrer">TikTok</a></li>
-      </ul>
-      <ul class="links links-row" id="social-links-community">
-        <li><a href="https://discord.gg/P9cmzxJrYT" target="_blank" rel="noopener noreferrer">Discord</a></li>
-        <li><a href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Ko-fi</a></li>
-        <li><a href="https://github.com/dylan-griffin/advtage-releases/releases" target="_blank" rel="noopener noreferrer">All Releases</a></li>
+      <ul class="pillars" aria-label="Why Advtage">
+        <li class="pillar">
+          <span class="pillar__key">$0</span>
+          <span class="pillar__label">Free &amp; ad-free — no hosting fees, ever</span>
+        </li>
+        <li class="pillar">
+          <span class="pillar__key">P2P</span>
+          <span class="pillar__label">Players join instantly from a web link</span>
+        </li>
+        <li class="pillar">
+          <span class="pillar__key">Local</span>
+          <span class="pillar__label">Campaign files stay on your machine</span>
+        </li>
       </ul>
     </section>
 
-    <footer>
+    <section class="links" aria-labelledby="links-title">
+      <div class="links__head">
+        <h2 id="links-title">Links</h2>
+        <span class="links__rule" aria-hidden="true"></span>
+      </div>
+
+      <ul class="links__row links__row--four" id="social-links-social">
+        <li>
+          <a class="tile" href="https://www.youtube.com/@advtagevtt" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg>
+            <span class="tile__label">YouTube</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href="https://www.instagram.com/advtagevtt" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.8 3.8 0 0 1-1.4-.9 3.8 3.8 0 0 1-.9-1.4c-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.1 3.3c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.3s0-2.1-.1-3.3c-.1-1.1-.2-1.7-.4-2.1a3.5 3.5 0 0 0-.8-1.3 3.5 3.5 0 0 0-1.3-.8c-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 8a3.1 3.1 0 1 0 0-6.2 3.1 3.1 0 0 0 0 6.2Zm5.1-8.2a1.15 1.15 0 1 1 0-2.3 1.15 1.15 0 0 1 0 2.3Z"/></svg>
+            <span class="tile__label">Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href="https://x.com/AdvtageVTT" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.2-6.82-5.96 6.82H1.7l7.73-8.84L1.25 2.25h6.82l4.7 6.22 5.47-6.22Zm-1.16 17.52h1.83L7.02 4.13H5.06l12.02 15.64Z"/></svg>
+            <span class="tile__label">X</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href="https://www.tiktok.com/@advtagevtt" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A5.2 5.2 0 0 1 15.3 2h-3.2v13.4a2.86 2.86 0 1 1-2.2-2.79V9.3a6.06 6.06 0 1 0 5.4 6.02V8.9a8.35 8.35 0 0 0 4.7 1.45V7.15a5.18 5.18 0 0 1-3.4-1.33Z"/></svg>
+            <span class="tile__label">TikTok</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="links__row links__row--three" id="social-links-community">
+        <li>
+          <a class="tile" href="https://discord.gg/P9cmzxJrYT" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.6A19 19 0 0 0 15.6 3.1l-.24.5a17.6 17.6 0 0 1 4.14 1.32 15.7 15.7 0 0 0-13-.02A17.5 17.5 0 0 1 10.7 3.6l-.25-.5A19 19 0 0 0 5.7 4.6 19.8 19.8 0 0 0 2.3 17.9a19.2 19.2 0 0 0 5.86 2.95l.47-.66a12.5 12.5 0 0 1-1.86-.9l.46-.35a13.7 13.7 0 0 0 11.54 0l.46.35c-.6.35-1.22.65-1.87.9l.47.66a19.1 19.1 0 0 0 5.86-2.95 19.7 19.7 0 0 0-3.4-13.3ZM9.35 15.1c-1.14 0-2.08-1.05-2.08-2.34 0-1.29.92-2.34 2.08-2.34 1.16 0 2.1 1.06 2.08 2.34 0 1.29-.93 2.34-2.08 2.34Zm5.3 0c-1.14 0-2.08-1.05-2.08-2.34 0-1.29.92-2.34 2.08-2.34 1.16 0 2.1 1.06 2.08 2.34 0 1.29-.92 2.34-2.08 2.34Z"/></svg>
+            <span class="tile__label">Discord</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h13.2A4.8 4.8 0 0 1 22 8.8a4.8 4.8 0 0 1-4.8 4.8h-1.06A5.1 5.1 0 0 1 11 18H8a4 4 0 0 1-4-4V4Zm12 3.2v4.2h1.2A2.1 2.1 0 0 0 19.3 9.3 2.1 2.1 0 0 0 17.2 7.2H16Z"/></svg>
+            <span class="tile__label">Ko-fi</span>
+          </a>
+        </li>
+        <li>
+          <a class="tile" href="https://github.com/dylan-griffin/advtage-releases/releases" target="_blank" rel="noopener noreferrer">
+            <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+            <span class="tile__label">All Releases</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
       <span>&copy; <span id="year"></span> Advtage</span>
       <a href="https://github.com/dylan-griffin/advtage-releases" target="_blank" rel="noopener noreferrer">advtage-releases</a>
-    </footer>
-  </div>
+    </div>
+  </footer>
+
   <script src="main.js"></script>
 </body>
 </html>
