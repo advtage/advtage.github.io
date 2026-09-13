@@ -23,7 +23,7 @@ async function wireDownload() {
       btn.href = RELEASES_LATEST;
     }
     versionLine.textContent = version
-      ? `Latest: v${version} ? Windows x64 NSIS`
+      ? `Latest: v${version} • Windows x64 NSIS`
       : "Latest Windows build";
   } catch (err) {
     console.warn(err);
