@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Releases • Advtage</title>
+  <meta name="description" content="Download Advtage Windows builds and browse every public release." />
+  <meta property="og:title" content="Advtage Releases" />
+  <meta property="og:description" content="Download Advtage Windows builds and browse every public release." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/adv-die.png" />
+  <link rel="icon" href="assets/adv-small.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#releases-list">Skip to releases</a>
+
+  <header class="nav">
+    <div class="nav__in">
+      <a class="brand" href="index.html" aria-label="Advtage home">
+        <img class="brand__icon" src="assets/adv-die.png" alt="" width="30" height="30" />
+        <span class="brand__name">Advtage</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="releases.html" aria-current="page">Releases</a>
+        <a href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Ko-fi</a>
+        <a href="https://discord.gg/P9cmzxJrYT" target="_blank" rel="noopener noreferrer">Discord</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="page-head__in">
+        <h1 class="page-head__title">Releases</h1>
+        <p class="page-head__lede">
+          Every public Windows build from the Advtage releases repo. Grab the latest installer, or roll back to an earlier version.
+        </p>
+      </div>
+    </section>
+
+    <section class="releases" aria-label="Release list">
+      <div class="releases__in" id="releases-list" role="status" aria-live="polite">
+        <p class="releases__status">Loading releases…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__in">
+      <span>&copy; <span id="year"></span> Advtage</span>
+      <a href="https://github.com/dylan-griffin/advtage-releases" target="_blank" rel="noopener noreferrer">advtage-releases</a>
+    </div>
+  </footer>
+
+  <script src="releases.js"></script>
+</body>
+</html>
