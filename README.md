@@ -3,6 +3,7 @@
 Official GitHub Pages landing for [Advtage](https://advtage.github.io/) — the 100% free, ad-free Windows DM app for D&D 5.5e.
 
 - **Download** pulls the latest Windows NSIS installer from the public [`advtage-releases`](https://github.com/dylan-griffin/advtage-releases) repo
+- **Releases** (`releases.html`) lists every public release from the GitHub API on-site
 - App source stays private in `dylan-griffin/advtage`
 
 ## Local preview
