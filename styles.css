@@ -116,6 +116,7 @@ a { color: inherit; }
   display: block;
   flex-shrink: 0;
   fill: currentColor;
+  transform: translateY(-0.5px);
 }
 
 /* ---------------- Hero ---------------- */
@@ -282,6 +283,7 @@ a { color: inherit; }
   display: block;
   flex-shrink: 0;
   fill: currentColor;
+  transform: translateY(-0.5px);
 }
 .donate-link span { line-height: 1; }
 
@@ -380,6 +382,9 @@ a { color: inherit; }
   display: block;
   fill: var(--muted);
   transition: fill 0.15s ease;
+}
+.slink[href*="ko-fi.com"] .slink__icon {
+  transform: translateY(-0.5px);
 }
 .slink span {
   display: block;
