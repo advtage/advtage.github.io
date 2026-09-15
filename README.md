@@ -31,4 +31,14 @@ npx --yes serve .
 
 Build in the private app repo, then publish installers to **this** repo’s GitHub Releases (tag `app-vX.Y.Z`), attach platform assets + signatures + `latest.json`. See `scripts/release-notes.json` for note format and `scripts/migrate-releases.mjs` for the migration reference.
 
-**Updater handoff:** Installed apps that still point at `dylan-griffin/advtage-releases` need either a final redirect release on the old repo or a client update — update the Tauri updater endpoint in the private source to this repo.
+### Updater handoff (old installs)
+
+Older apps still poll `dylan-griffin/advtage-releases`. When that repo has write access for the agent (or manually), run:
+
+```bash
+node scripts/publish-handoff-release.mjs
+```
+
+That publishes a final release whose `latest.json` is a copy of this repo’s latest updater manifest (Windows/Linux signed platforms). Also update the Tauri updater endpoint in private `dylan-griffin/advtage` to:
+
+`https://github.com/advtage/advtage.github.io/releases/latest/download/latest.json`
