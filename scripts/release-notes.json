@@ -1,0 +1,6 @@
+{
+  "app-v0.1.11": "## v0.1.11\n\n- Initial public Windows release (x64 NSIS installer)\n- Per-user install, no admin required\n- In-app auto-update checks GitHub Releases",
+  "app-v0.1.15": "## v0.1.15\n\nSince v0.1.11:\n\n- Updated Windows NSIS installer\n- Packaging and updater manifest improvements",
+  "app-v0.1.17": "## v0.1.17\n\nSince v0.1.15:\n\n- Updated Windows NSIS installer\n- Release pipeline and updater fixes",
+  "app-v0.1.24": "## v0.1.24\n\nSince v0.1.17:\n\n- **macOS** builds added — Apple Silicon (`.dmg`) and Intel (`.dmg`)\n- **Linux** builds added — AppImage (primary) and `.deb`\n- Windows NSIS installer updated\n\n### macOS Gatekeeper\n\nMac builds are **unsigned** (not Apple Developer ID signed or notarized). First launch may require right-click → Open, or allow in System Settings → Privacy & Security."
+}

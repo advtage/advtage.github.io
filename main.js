@@ -1,7 +1,7 @@
 const RELEASES_API =
-  "https://api.github.com/repos/dylan-griffin/advtage-releases/releases/latest";
+  "https://api.github.com/repos/advtage/advtage.github.io/releases/latest";
 const RELEASES_LATEST =
-  "https://github.com/dylan-griffin/advtage-releases/releases/latest";
+  "https://github.com/advtage/advtage.github.io/releases/latest";
 const SIG_RE = /\.sig$/i;
 
 const PLATFORM_SPECS = [
