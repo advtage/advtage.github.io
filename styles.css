@@ -215,8 +215,8 @@ a { color: inherit; }
   min-height: 2.85rem;
 }
 .btn__os {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1.15rem;
+  height: 1.15rem;
   flex-shrink: 0;
   display: block;
 }
@@ -467,8 +467,8 @@ a { color: inherit; }
   gap: 0.45rem;
 }
 .release__downloads .btn__os {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 1.05rem;
+  height: 1.05rem;
 }
 .release__notes {
   margin: 0;
