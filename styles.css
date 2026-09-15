@@ -114,13 +114,13 @@ a { color: inherit; }
 }
 .hero__mark {
   position: absolute;
-  inset: auto -8% -28% auto;
-  width: min(92vw, 820px);
-  height: min(92vw, 820px);
+  inset: auto -14% -36% auto;
+  width: min(118vw, 1080px);
+  height: min(118vw, 1080px);
   z-index: 0;
   pointer-events: none;
-  opacity: 0.42;
-  transform: rotate(-8deg);
+  opacity: 0.48;
+  transform: rotate(-10deg);
 }
 .hero__mark-img {
   width: 100%;
