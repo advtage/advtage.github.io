@@ -9,34 +9,41 @@ const PLATFORM_SPECS = [
   {
     id: "windows",
     family: "windows",
-    label: "Windows x64",
+    label: "x64",
     test: (name) => /Advtage_.*_x64-setup\.exe$/i.test(name),
   },
   {
     id: "mac-arm",
     family: "mac",
-    label: "Mac Apple Silicon",
+    label: "Apple Silicon",
     test: (name) => /Advtage_.*_aarch64\.dmg$/i.test(name),
   },
   {
     id: "mac-intel",
     family: "mac",
-    label: "Mac Intel",
+    label: "Intel",
     test: (name) => /Advtage_.*_x64\.dmg$/i.test(name),
   },
   {
     id: "linux-appimage",
     family: "linux",
-    label: "Linux AppImage",
+    label: "AppImage",
     test: (name) => /Advtage_.*_amd64\.AppImage$/i.test(name),
   },
   {
     id: "linux-deb",
     family: "linux",
-    label: "Linux .deb",
+    label: ".deb",
     test: (name) => /Advtage_.*_amd64\.deb$/i.test(name),
   },
 ];
+
+const FAMILY_ORDER = ["windows", "mac", "linux"];
+const FAMILY_LABELS = {
+  windows: "Windows",
+  mac: "Mac",
+  linux: "Linux",
+};
 
 document.getElementById("year").textContent = String(new Date().getFullYear());
 
@@ -54,8 +61,6 @@ function classifyAssets(assets) {
   return found;
 }
 
-const FAMILY_ORDER = ["windows", "mac", "linux"];
-
 function downloadButtonHtml(href, label, family) {
   const icon = OS_ICONS[family] || "";
   return `<a class="btn btn--download" href="${href}">${icon}<span class="btn__label">${label}</span></a>`;
@@ -64,6 +69,7 @@ function downloadButtonHtml(href, label, family) {
 function groupByFamily(classified) {
   return FAMILY_ORDER.map((family) => ({
     family,
+    label: FAMILY_LABELS[family],
     items: classified.filter((c) => c.family === family),
   })).filter((group) => group.items.length);
 }
@@ -77,16 +83,18 @@ function renderDownloadButtons(classified) {
     return;
   }
 
-  // One row per OS: Windows → Mac → Linux (variants stay side-by-side in-group).
   root.innerHTML = groupByFamily(classified)
-    .map(
-      ({ family, items }) =>
-        `<div class="dl-group" data-os="${family}">${items
-          .map(({ label, asset, family: f }) =>
-            downloadButtonHtml(asset.browser_download_url, label, f)
-          )
-          .join("")}</div>`
-    )
+    .map(({ family, label, items }) => {
+      const buttons = items
+        .map(({ label: option, asset, family: f }) =>
+          downloadButtonHtml(asset.browser_download_url, option, f)
+        )
+        .join("");
+      return `<section class="dl-section" data-os="${family}" aria-label="${label}">
+  <h2 class="dl-section__title">${label}</h2>
+  <div class="dl-section__btns">${buttons}</div>
+</section>`;
+    })
     .join("");
 }
 

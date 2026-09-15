@@ -9,34 +9,41 @@ const PLATFORM_SPECS = [
   {
     id: "windows",
     family: "windows",
-    label: "Windows x64",
+    label: "x64",
     test: (name) => /Advtage_.*_x64-setup\.exe$/i.test(name),
   },
   {
     id: "mac-arm",
     family: "mac",
-    label: "Mac Apple Silicon",
+    label: "Apple Silicon",
     test: (name) => /Advtage_.*_aarch64\.dmg$/i.test(name),
   },
   {
     id: "mac-intel",
     family: "mac",
-    label: "Mac Intel",
+    label: "Intel",
     test: (name) => /Advtage_.*_x64\.dmg$/i.test(name),
   },
   {
     id: "linux-appimage",
     family: "linux",
-    label: "Linux AppImage",
+    label: "AppImage",
     test: (name) => /Advtage_.*_amd64\.AppImage$/i.test(name),
   },
   {
     id: "linux-deb",
     family: "linux",
-    label: "Linux .deb",
+    label: ".deb",
     test: (name) => /Advtage_.*_amd64\.deb$/i.test(name),
   },
 ];
+
+const FAMILY_ORDER = ["windows", "mac", "linux"];
+const FAMILY_LABELS = {
+  windows: "Windows",
+  mac: "Mac",
+  linux: "Linux",
+};
 
 const BOILERPLATE_PARA_RE =
   /^\s*Auto-built from private source\b[^\n]*(?:\n(?![#\-*]|\d+\.)[^\n]*)*/i;
@@ -179,11 +186,10 @@ function renderMarkdownLite(raw) {
   return parts.join("");
 }
 
-const FAMILY_ORDER = ["windows", "mac", "linux"];
-
 function groupByFamily(classified) {
   return FAMILY_ORDER.map((family) => ({
     family,
+    label: FAMILY_LABELS[family],
     items: classified.filter((c) => c.family === family),
   })).filter((group) => group.items.length);
 }
@@ -193,20 +199,22 @@ function renderDownloads(classified) {
     return `<p class="release__downloads-empty">No installer assets attached.</p>`;
   }
 
-  // One row per OS: Windows → Mac → Linux (variants stay side-by-side in-group).
-  const groups = groupByFamily(classified)
-    .map(({ family, items }) => {
+  const sections = groupByFamily(classified)
+    .map(({ family, label, items }) => {
       const buttons = items
-        .map(({ label, asset, family: f }) => {
+        .map(({ label: option, asset, family: f }) => {
           const icon = OS_ICONS[f] || "";
-          return `<a class="btn btn--download" href="${escapeHtml(asset.browser_download_url)}">${icon}<span class="btn__label">${escapeHtml(label)}</span></a>`;
+          return `<a class="btn btn--download" href="${escapeHtml(asset.browser_download_url)}">${icon}<span class="btn__label">${escapeHtml(option)}</span></a>`;
         })
         .join("");
-      return `<div class="dl-group" data-os="${family}">${buttons}</div>`;
+      return `<section class="dl-section" data-os="${family}" aria-label="${escapeHtml(label)}">
+  <h3 class="dl-section__title">${escapeHtml(label)}</h3>
+  <div class="dl-section__btns">${buttons}</div>
+</section>`;
     })
     .join("");
 
-  return `<div class="release__downloads">${groups}</div>`;
+  return `<div class="release__downloads">${sections}</div>`;
 }
 
 function renderRelease(release, isLatest) {

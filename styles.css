@@ -181,16 +181,33 @@ a { color: inherit; }
 .dl-row {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.55rem;
+  align-items: stretch;
+  gap: 1rem;
   width: 100%;
-  max-width: 42rem;
+  max-width: 36rem;
 }
-.dl-group {
+.dl-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  width: 100%;
+}
+.dl-section__title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.2;
+}
+.dl-section__btns {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   gap: 0.55rem;
+  width: 100%;
 }
 .btn {
   display: inline-flex;
@@ -459,10 +476,18 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.4rem;
+  gap: 0.75rem;
   max-width: 28rem;
+  width: 100%;
 }
-.release__downloads .dl-group {
+.release__downloads .dl-section {
+  align-items: flex-end;
+}
+.release__downloads .dl-section__title {
+  text-align: right;
+  font-size: 0.72rem;
+}
+.release__downloads .dl-section__btns {
   justify-content: flex-end;
   gap: 0.4rem;
 }
@@ -582,8 +607,7 @@ a { color: inherit; }
   .links__in { grid-template-columns: 1fr; gap: 2.25rem; }
   .actions { gap: 0.9rem; }
   .dl-row { width: 100%; }
-  .dl-group { width: 100%; }
-  .dl-group .btn { flex: 1 1 calc(50% - 0.55rem); }
+  .dl-section__btns .btn { flex: 1 1 calc(50% - 0.55rem); }
   .release__actions {
     width: 100%;
     align-items: stretch;
@@ -593,12 +617,14 @@ a { color: inherit; }
     max-width: none;
     width: 100%;
   }
-  .release__downloads .dl-group { justify-content: flex-start; width: 100%; }
+  .release__downloads .dl-section { align-items: stretch; }
+  .release__downloads .dl-section__title { text-align: left; }
+  .release__downloads .dl-section__btns { justify-content: flex-start; }
   .release__downloads .btn--download { flex: 1 1 calc(50% - 0.45rem); text-align: center; }
 }
 
 @media (max-width: 380px) {
-  .dl-group .btn,
+  .dl-section__btns .btn,
   .release__downloads .btn--download { flex-basis: 100%; }
   .actions { align-items: stretch; }
   .actions__alt { align-self: flex-start; }
