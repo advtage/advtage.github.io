@@ -33,21 +33,14 @@ Build in the private app repo, then publish installers to **this** repo’s GitH
 
 ### Updater handoff (old installs)
 
-Older apps still poll `dylan-griffin/advtage-releases`. When that repo has write access for the agent (or manually), run:
+Older apps still poll `dylan-griffin/advtage-releases`. Publish a final handoff release with:
 
 ```bash
 node scripts/publish-handoff-release.mjs
 ```
 
-Creating a release via the GitHub API on dylan-griffin/advtage-releases currently returns:
+**Current blocker (this agent):** creating releases there returns `HTTP 403: Resource not accessible by integration` — read works, write does not. Grant the Cursor GitHub App **write** on `dylan-griffin/advtage-releases` and include it in this Cloud Agent environment, then re-run the script.
 
-```
-HTTP 403: Resource not accessible by integration
-```
+Also point the Tauri updater in private `dylan-griffin/advtage` at:
 
-This Cloud Agent token can **read** that repo but cannot create releases there until the Cursor GitHub App grants write on `dylan-griffin/advtage-releases` (and the environment includes it). When unblocked, run:
-
-```bash
-node scripts/publish-handoff-release.mjs
-```
-
+`https://github.com/advtage/advtage.github.io/releases/latest/download/latest.json`
