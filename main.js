@@ -54,9 +54,18 @@ function classifyAssets(assets) {
   return found;
 }
 
+const FAMILY_ORDER = ["windows", "mac", "linux"];
+
 function downloadButtonHtml(href, label, family) {
   const icon = OS_ICONS[family] || "";
   return `<a class="btn btn--download" href="${href}">${icon}<span class="btn__label">${label}</span></a>`;
+}
+
+function groupByFamily(classified) {
+  return FAMILY_ORDER.map((family) => ({
+    family,
+    items: classified.filter((c) => c.family === family),
+  })).filter((group) => group.items.length);
 }
 
 function renderDownloadButtons(classified) {
@@ -68,9 +77,15 @@ function renderDownloadButtons(classified) {
     return;
   }
 
-  root.innerHTML = classified
-    .map(({ label, asset, family }) =>
-      downloadButtonHtml(asset.browser_download_url, label, family)
+  // One row per OS: Windows → Mac → Linux (variants stay side-by-side in-group).
+  root.innerHTML = groupByFamily(classified)
+    .map(
+      ({ family, items }) =>
+        `<div class="dl-group" data-os="${family}">${items
+          .map(({ label, asset, family: f }) =>
+            downloadButtonHtml(asset.browser_download_url, label, f)
+          )
+          .join("")}</div>`
     )
     .join("");
 }

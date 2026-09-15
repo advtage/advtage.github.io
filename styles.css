@@ -180,9 +180,17 @@ a { color: inherit; }
 }
 .dl-row {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 42rem;
+}
+.dl-group {
+  display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  max-width: 40rem;
+  align-items: stretch;
+  gap: 0.55rem;
 }
 .btn {
   display: inline-flex;
@@ -449,10 +457,14 @@ a { color: inherit; }
 }
 .release__downloads {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  max-width: 28rem;
+}
+.release__downloads .dl-group {
   justify-content: flex-end;
-  max-width: 22rem;
+  gap: 0.4rem;
 }
 .release__downloads-empty {
   margin: 0;
@@ -570,17 +582,23 @@ a { color: inherit; }
   .links__in { grid-template-columns: 1fr; gap: 2.25rem; }
   .actions { gap: 0.9rem; }
   .dl-row { width: 100%; }
-  .dl-row .btn { flex: 1 1 calc(50% - 0.55rem); }
+  .dl-group { width: 100%; }
+  .dl-group .btn { flex: 1 1 calc(50% - 0.55rem); }
   .release__actions {
     width: 100%;
     align-items: stretch;
   }
-  .release__downloads { justify-content: flex-start; max-width: none; width: 100%; }
+  .release__downloads {
+    align-items: stretch;
+    max-width: none;
+    width: 100%;
+  }
+  .release__downloads .dl-group { justify-content: flex-start; width: 100%; }
   .release__downloads .btn--download { flex: 1 1 calc(50% - 0.45rem); text-align: center; }
 }
 
 @media (max-width: 380px) {
-  .dl-row .btn,
+  .dl-group .btn,
   .release__downloads .btn--download { flex-basis: 100%; }
   .actions { align-items: stretch; }
   .actions__alt { align-self: flex-start; }

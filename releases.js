@@ -179,19 +179,34 @@ function renderMarkdownLite(raw) {
   return parts.join("");
 }
 
+const FAMILY_ORDER = ["windows", "mac", "linux"];
+
+function groupByFamily(classified) {
+  return FAMILY_ORDER.map((family) => ({
+    family,
+    items: classified.filter((c) => c.family === family),
+  })).filter((group) => group.items.length);
+}
+
 function renderDownloads(classified) {
   if (!classified.length) {
     return `<p class="release__downloads-empty">No installer assets attached.</p>`;
   }
 
-  const buttons = classified
-    .map(({ label, asset, family }) => {
-      const icon = OS_ICONS[family] || "";
-      return `<a class="btn btn--download" href="${escapeHtml(asset.browser_download_url)}">${icon}<span class="btn__label">${escapeHtml(label)}</span></a>`;
+  // One row per OS: Windows → Mac → Linux (variants stay side-by-side in-group).
+  const groups = groupByFamily(classified)
+    .map(({ family, items }) => {
+      const buttons = items
+        .map(({ label, asset, family: f }) => {
+          const icon = OS_ICONS[f] || "";
+          return `<a class="btn btn--download" href="${escapeHtml(asset.browser_download_url)}">${icon}<span class="btn__label">${escapeHtml(label)}</span></a>`;
+        })
+        .join("");
+      return `<div class="dl-group" data-os="${family}">${buttons}</div>`;
     })
     .join("");
 
-  return `<div class="release__downloads">${buttons}</div>`;
+  return `<div class="release__downloads">${groups}</div>`;
 }
 
 function renderRelease(release, isLatest) {
