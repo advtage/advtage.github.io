@@ -39,9 +39,6 @@ const PLATFORM_SPECS = [
 
 const BOILERPLATE_PARA_RE =
   /^\s*Auto-built from private source\b[^\n]*(?:\n(?![#\-*]|\d+\.)[^\n]*)*/i;
-// Site already lists assets as download buttons — drop the mirrored Downloads section.
-const DOWNLOADS_SECTION_RE =
-  /^##\s+Downloads\s*\n(?:.*\n)*?(?=^#{1,3}\s|\Z)/im;
 
 document.getElementById("year").textContent = String(new Date().getFullYear());
 
@@ -91,10 +88,8 @@ function cleanReleaseNotes(raw) {
   let text = String(raw).replace(/\r\n/g, "\n").trim();
   if (!text) return "";
 
-  // Drop the leading auto-built boilerplate paragraph when present.
+  // Drop only the leading auto-built boilerplate; keep the rest of the release markdown.
   text = text.replace(BOILERPLATE_PARA_RE, "").replace(/^\s*\n+/, "").trim();
-  // Drop the mirrored Downloads inventory; keep Gatekeeper / real changelog text.
-  text = text.replace(DOWNLOADS_SECTION_RE, "").trim();
   text = text.replace(/\n{3,}/g, "\n\n").trim();
   return text;
 }
@@ -105,7 +100,11 @@ function inlineMarkdown(text) {
     /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
     '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
   );
+  // Bold before italics so ** wins over *
   html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>");
+  html = html.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+  html = html.replace(/(?<!_)_([^_\n]+)_(?!_)/g, "<em>$1</em>");
   html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
   return html;
 }
@@ -123,15 +122,28 @@ function renderMarkdownLite(raw) {
   }
 
   for (const line of lines) {
-    const heading = /^(#{1,3})\s+(.+)$/.exec(line);
+    const heading = /^(#{1,4})\s+(.+)$/.exec(line);
     if (heading) {
       closeList();
-      const level = heading[1].length;
-      parts.push(`<h${level + 2} class="notes-h">${inlineMarkdown(heading[2])}</h${level + 2}>`);
+      const level = Math.min(heading[1].length + 2, 6);
+      parts.push(`<h${level} class="notes-h">${inlineMarkdown(heading[2])}</h${level}>`);
       continue;
     }
 
-    const ul = /^[-*]\s+(.+)$/.exec(line);
+    if (/^---+\s*$/.test(line) || /^\*\*\*+\s*$/.test(line)) {
+      closeList();
+      parts.push('<hr class="notes-hr" />');
+      continue;
+    }
+
+    const quote = /^>\s?(.*)$/.exec(line);
+    if (quote) {
+      closeList();
+      parts.push(`<blockquote class="notes-quote">${inlineMarkdown(quote[1])}</blockquote>`);
+      continue;
+    }
+
+    const ul = /^[-*+]\s+(.+)$/.exec(line);
     if (ul) {
       if (listType !== "ul") {
         closeList();

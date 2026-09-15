@@ -531,6 +531,18 @@ a { color: inherit; }
 }
 .release__notes a:hover { border-bottom-color: var(--accent); }
 .release__notes strong { color: var(--ink); font-weight: 650; }
+.release__notes em { font-style: italic; }
+.release__notes .notes-hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 1rem 0;
+}
+.release__notes .notes-quote {
+  margin: 0 0 0.85rem;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 2px solid var(--line-2);
+  color: var(--muted);
+}
 
 /* ---------------- Footer ---------------- */
 .foot {
