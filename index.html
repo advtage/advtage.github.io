@@ -23,8 +23,11 @@
       </a>
       <nav class="nav__links" aria-label="Primary">
         <a href="releases.html">Releases</a>
-        <a href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Donate</a>
-        <a href="https://discord.gg/P9cmzxJrYT" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a href="socials.html">Socials</a>
+        <a class="nav-donate" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">
+          <svg class="nav-donate__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35 10.55 19.9C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12.1 21.35Z"/></svg>
+          <span>Donate</span>
+        </a>
       </nav>
     </div>
   </header>
@@ -50,7 +53,10 @@
                 Download for Windows
               </a>
             </div>
-            <a class="actions__alt" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Donate</a>
+            <a class="actions__alt donate-link" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">
+              <svg class="donate-link__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35 10.55 19.9C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12.1 21.35Z"/></svg>
+              <span>Donate</span>
+            </a>
           </div>
 
           <p class="version" id="version-line">Fetching latest version…</p>
@@ -63,21 +69,68 @@
       </div>
     </section>
 
-    <section class="facts" aria-label="What Advtage is">
-      <dl class="facts__in">
-        <div class="fact">
-          <dt class="fact__term">Free &amp; ad-free</dt>
-          <dd class="fact__desc">No subscription, no ads, no hosting fees. The app is yours to keep.</dd>
+    <section class="how" aria-label="How a session starts">
+      <div class="how__in">
+        <div class="how__head">
+          <h2 class="how__title">How a session starts</h2>
+          <p class="how__lede">A lightweight look at the host → link → join loop. No invented app chrome — just the product flow.</p>
         </div>
-        <div class="fact">
-          <dt class="fact__term">Peer-to-peer</dt>
-          <dd class="fact__desc">Players join your table instantly from a shared web link — nothing to install.</dd>
+        <ol class="how__steps">
+          <li class="how-step">
+            <span class="how-step__n" aria-hidden="true">1</span>
+            <div class="how-step__body">
+              <h3 class="how-step__title">Host on your machine</h3>
+              <p class="how-step__text">Open Advtage as the DM. The table runs locally — you are not renting a server for the night.</p>
+            </div>
+          </li>
+          <li class="how-step">
+            <span class="how-step__n" aria-hidden="true">2</span>
+            <div class="how-step__body">
+              <h3 class="how-step__title">Share a join link</h3>
+              <p class="how-step__text">Send players a peer-to-peer web link. They join from the browser — nothing to install on their side.</p>
+              <div class="how-demo" aria-hidden="true">
+                <span class="how-demo__label">Join link</span>
+                <code class="how-demo__url">https://…/join/&lt;session&gt;</code>
+              </div>
+            </div>
+          </li>
+          <li class="how-step">
+            <span class="how-step__n" aria-hidden="true">3</span>
+            <div class="how-step__body">
+              <h3 class="how-step__title">Keep playing</h3>
+              <p class="how-step__text">Campaign files stay on your disk between sessions. Pick up where you left off without a cloud sync tax.</p>
+            </div>
+          </li>
+        </ol>
+        <div class="how__mark" aria-hidden="true">
+          <img src="assets/adv-die.png" alt="" width="220" height="220" />
         </div>
-        <div class="fact">
-          <dt class="fact__term">Local by default</dt>
-          <dd class="fact__desc">Campaign files live on your machine, not on someone else's server.</dd>
-        </div>
-      </dl>
+      </div>
+    </section>
+
+    <section class="features" aria-label="Product features">
+      <div class="features__in">
+        <article class="feature">
+          <h2 class="feature__title">Host and join via link</h2>
+          <p class="feature__text">Start the table on the DM app, share one link, and players drop in from a browser. Peer-to-peer — no account wall for joining the session.</p>
+        </article>
+        <article class="feature">
+          <h2 class="feature__title">Local campaign files</h2>
+          <p class="feature__text">Maps, notes, and campaign data live on your machine by default. You own the files; nothing requires uploading your table to a host you don’t control.</p>
+        </article>
+        <article class="feature">
+          <h2 class="feature__title">Built for the DM table</h2>
+          <p class="feature__text">Advtage is a DM-focused D&amp;D 5.5e app — run the session tools you need at the table without bolting on a separate hosting stack.</p>
+        </article>
+        <article class="feature">
+          <h2 class="feature__title">Windows, Mac, and Linux</h2>
+          <p class="feature__text">Installers for Windows x64, Mac Apple Silicon and Intel, plus Linux AppImage and .deb — same public releases from this site.</p>
+        </article>
+        <article class="feature">
+          <h2 class="feature__title">No hosting fees</h2>
+          <p class="feature__text">100% free and ad-free. No subscription to keep the lights on for your players, and no per-session server bill.</p>
+        </article>
+      </div>
     </section>
 
     <section class="links">
@@ -123,8 +176,14 @@
             </li>
             <li>
               <a class="slink" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">
-                <svg class="slink__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h13.2A4.8 4.8 0 0 1 22 8.8a4.8 4.8 0 0 1-4.8 4.8h-1.06A5.1 5.1 0 0 1 11 18H8a4 4 0 0 1-4-4V4Zm12 3.2v4.2h1.2A2.1 2.1 0 0 0 19.3 9.3 2.1 2.1 0 0 0 17.2 7.2H16Z"/></svg>
+                <svg class="slink__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35 10.55 19.9C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12.1 21.35Z"/></svg>
                 <span>Donate</span>
+              </a>
+            </li>
+            <li>
+              <a class="slink" href="socials.html">
+                <svg class="slink__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a3 3 0 1 0-2.83-4H8.83a3 3 0 1 0 0 2H12v2.18A3 3 0 0 0 9 13v1H7a3 3 0 1 0 0 2h2v1a3 3 0 0 0 3 3h.18A3 3 0 1 0 15 17.17V8Zm-6 9h.17A3 3 0 0 0 15 14.17V13a3 3 0 0 0-3-3Z"/></svg>
+                <span>All socials</span>
               </a>
             </li>
             <li>
@@ -142,7 +201,14 @@
   <footer class="foot">
     <div class="foot__in">
       <span>&copy; <span id="year"></span> Advtage</span>
-      <a href="https://github.com/advtage/advtage.github.io/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+      <div class="foot__links">
+        <a href="releases.html">Releases</a>
+        <a href="socials.html">Socials</a>
+        <a class="donate-link" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">
+          <svg class="donate-link__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35 10.55 19.9C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12.1 21.35Z"/></svg>
+          <span>Donate</span>
+        </a>
+      </div>
     </div>
   </footer>
 
