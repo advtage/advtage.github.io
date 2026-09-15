@@ -39,6 +39,15 @@ Older apps still poll `dylan-griffin/advtage-releases`. When that repo has write
 node scripts/publish-handoff-release.mjs
 ```
 
-That publishes a final release whose `latest.json` is a copy of this repo’s latest updater manifest (Windows/Linux signed platforms). Also update the Tauri updater endpoint in private `dylan-griffin/advtage` to:
+Creating a release via the GitHub API on dylan-griffin/advtage-releases currently returns:
 
-`https://github.com/advtage/advtage.github.io/releases/latest/download/latest.json`
+```
+HTTP 403: Resource not accessible by integration
+```
+
+This Cloud Agent token can **read** that repo but cannot create releases there until the Cursor GitHub App grants write on `dylan-griffin/advtage-releases` (and the environment includes it). When unblocked, run:
+
+```bash
+node scripts/publish-handoff-release.mjs
+```
+
