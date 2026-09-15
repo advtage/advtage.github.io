@@ -183,24 +183,14 @@ function renderDownloads(classified) {
     return `<p class="release__downloads-empty">No installer assets attached.</p>`;
   }
 
-  const windows = classified.find((c) => c.id === "windows");
-  const others = classified.filter((c) => c.id !== "windows");
-
-  const primary = windows
-    ? `<a class="btn release__download" href="${escapeHtml(windows.asset.browser_download_url)}">Download Windows</a>`
-    : "";
-
-  const secondary = others
+  const buttons = classified
     .map(
-      ({ label, short, asset }) =>
-        `<a class="release__platform" href="${escapeHtml(asset.browser_download_url)}" title="${escapeHtml(label)}">${escapeHtml(short)}</a>`
+      ({ label, asset }) =>
+        `<a class="btn btn--download" href="${escapeHtml(asset.browser_download_url)}">${escapeHtml(label)}</a>`
     )
     .join("");
 
-  return `<div class="release__downloads">
-    ${primary}
-    ${secondary ? `<div class="release__platforms">${secondary}</div>` : ""}
-  </div>`;
+  return `<div class="release__downloads">${buttons}</div>`;
 }
 
 function renderRelease(release, isLatest) {

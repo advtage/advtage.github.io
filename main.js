@@ -7,32 +7,27 @@ const SIG_RE = /\.sig$/i;
 const PLATFORM_SPECS = [
   {
     id: "windows",
-    label: "Windows",
-    detail: "x64 NSIS",
+    label: "Windows x64",
     test: (name) => /Advtage_.*_x64-setup\.exe$/i.test(name),
   },
   {
     id: "mac-arm",
-    label: "Mac",
-    detail: "Apple Silicon",
+    label: "Mac Apple Silicon",
     test: (name) => /Advtage_.*_aarch64\.dmg$/i.test(name),
   },
   {
     id: "mac-intel",
-    label: "Mac",
-    detail: "Intel",
+    label: "Mac Intel",
     test: (name) => /Advtage_.*_x64\.dmg$/i.test(name),
   },
   {
     id: "linux-appimage",
-    label: "Linux",
-    detail: "AppImage",
+    label: "Linux AppImage",
     test: (name) => /Advtage_.*_amd64\.AppImage$/i.test(name),
   },
   {
     id: "linux-deb",
-    label: "Linux",
-    detail: ".deb",
+    label: "Linux .deb",
     test: (name) => /Advtage_.*_amd64\.deb$/i.test(name),
   },
 ];
@@ -40,51 +35,37 @@ const PLATFORM_SPECS = [
 document.getElementById("year").textContent = String(new Date().getFullYear());
 
 function classifyAssets(assets) {
-  const found = {};
-  for (const asset of assets || []) {
-    if (SIG_RE.test(asset.name) || /^latest\.json$/i.test(asset.name)) continue;
-    for (const spec of PLATFORM_SPECS) {
-      if (!found[spec.id] && spec.test(asset.name)) {
-        found[spec.id] = asset;
-        break;
-      }
-    }
+  const found = [];
+  for (const spec of PLATFORM_SPECS) {
+    const asset = (assets || []).find(
+      (a) =>
+        !SIG_RE.test(a.name) &&
+        !/^latest\.json$/i.test(a.name) &&
+        spec.test(a.name)
+    );
+    if (asset) found.push({ ...spec, asset });
   }
   return found;
 }
 
-function renderPlatformLinks(byPlatform) {
-  const root = document.getElementById("platform-downloads");
+function renderDownloadButtons(classified, version) {
+  const root = document.getElementById("download-row");
   if (!root) return;
 
-  // Primary CTA already covers Windows — list the other platforms here.
-  const items = PLATFORM_SPECS.filter(
-    (spec) => spec.id !== "windows" && byPlatform[spec.id]
-  ).map((spec) => {
-    const asset = byPlatform[spec.id];
-    return `<li>
-      <a class="platform-link" href="${asset.browser_download_url}">
-        <span class="platform-link__os">${spec.label}</span>
-        <span class="platform-link__detail">${spec.detail}</span>
-      </a>
-    </li>`;
-  });
-
-  if (!items.length) {
-    root.hidden = true;
-    root.innerHTML = "";
+  if (!classified.length) {
+    root.innerHTML = `<a class="btn" id="download-btn" href="${RELEASES_LATEST}">Download latest release</a>`;
     return;
   }
 
-  root.hidden = false;
-  root.innerHTML = `
-    <p class="platform-downloads__label">Also available</p>
-    <ul class="platform-downloads__list">${items.join("")}</ul>
-  `;
+  root.innerHTML = classified
+    .map(({ label, asset }) => {
+      const text = version ? `${label}` : label;
+      return `<a class="btn btn--download" href="${asset.browser_download_url}">${text}</a>`;
+    })
+    .join("");
 }
 
 async function wireDownload() {
-  const btn = document.getElementById("download-btn");
   const versionLine = document.getElementById("version-line");
   const caveat = document.getElementById("mac-caveat");
   try {
@@ -93,47 +74,28 @@ async function wireDownload() {
     });
     if (!res.ok) throw new Error("release fetch failed");
     const data = await res.json();
-    const byPlatform = classifyAssets(data.assets);
-    const windows = byPlatform.windows;
+    const classified = classifyAssets(data.assets);
     const version = (data.tag_name || "").replace(/^app-v/, "") || data.name || "";
-    const hasMac = Boolean(byPlatform["mac-arm"] || byPlatform["mac-intel"]);
-    const platforms = Object.keys(byPlatform).length;
+    const hasMac = classified.some((c) => c.id.startsWith("mac"));
+    const bits = [];
+    if (classified.some((c) => c.id === "windows")) bits.push("Windows");
+    if (hasMac) bits.push("Mac");
+    if (classified.some((c) => c.id.startsWith("linux"))) bits.push("Linux");
 
-    if (windows?.browser_download_url) {
-      btn.href = windows.browser_download_url;
-      btn.textContent = version
-        ? `Download Advtage ${version} for Windows`
-        : "Download for Windows";
-    } else {
-      btn.href = RELEASES_LATEST;
-      btn.textContent = "Download latest release";
-    }
+    renderDownloadButtons(classified, version);
 
-    renderPlatformLinks(byPlatform);
-
-    if (version && platforms) {
-      const bits = ["Windows"];
-      if (hasMac) bits.push("Mac");
-      if (byPlatform["linux-appimage"] || byPlatform["linux-deb"]) bits.push("Linux");
-      versionLine.textContent = `Latest: v${version} • ${bits.join(" · ")}`;
-    } else if (version) {
-      versionLine.textContent = `Latest: v${version}`;
-    } else {
-      versionLine.textContent = "Latest public build";
-    }
+    versionLine.textContent = version
+      ? bits.length
+        ? `Latest: v${version} • ${bits.join(" · ")}`
+        : `Latest: v${version}`
+      : "Latest public build";
 
     if (caveat) caveat.hidden = !hasMac;
   } catch (err) {
     console.warn(err);
-    btn.href = RELEASES_LATEST;
-    btn.textContent = "Download latest release";
+    renderDownloadButtons([], "");
     versionLine.textContent = "Open latest release on GitHub";
     if (caveat) caveat.hidden = true;
-    const root = document.getElementById("platform-downloads");
-    if (root) {
-      root.hidden = true;
-      root.innerHTML = "";
-    }
   }
 }
 

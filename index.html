@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <a class="skip" href="#download-btn">Skip to download</a>
+  <a class="skip" href="#download-row">Skip to download</a>
 
   <header class="nav">
     <div class="nav__in">
@@ -42,14 +42,15 @@
           </p>
 
           <div class="actions">
-            <a class="btn" id="download-btn" href="https://github.com/dylan-griffin/advtage-releases/releases/latest">
-              Download for Windows
-            </a>
+            <div class="dl-row" id="download-row">
+              <a class="btn" id="download-btn" href="https://github.com/dylan-griffin/advtage-releases/releases/latest">
+                Download for Windows
+              </a>
+            </div>
             <a class="actions__alt" href="https://ko-fi.com/advtage" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
           </div>
 
           <p class="version" id="version-line">Fetching latest version…</p>
-          <div class="platform-downloads" id="platform-downloads" hidden></div>
           <p class="fine">Per-user installers <span class="mid">•</span> Open-access binaries <span class="mid">•</span> <a class="fine__link" href="releases.html">All releases</a></p>
           <p class="fine fine--caveat" id="mac-caveat" hidden>
             Mac builds are unsigned (not Apple Developer ID signed or notarized).

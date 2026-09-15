@@ -147,22 +147,28 @@ a { color: inherit; }
   line-height: 1.6;
 }
 
-/* ---- Actions: Download is the single primary ---- */
+/* ---- Actions: equal download buttons per platform ---- */
 .actions {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
   margin-bottom: 1.35rem;
+}
+.dl-row {
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.55rem;
+  max-width: 36rem;
 }
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 1.6rem;
+  padding: 0.85rem 1.35rem;
   background: var(--accent);
   color: var(--accent-ink);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--accent);
@@ -171,6 +177,7 @@ a { color: inherit; }
 }
 .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .btn.pending { opacity: 0.6; pointer-events: none; }
+.btn--download { white-space: nowrap; }
 
 .actions__alt {
   color: var(--ink-2);
@@ -207,51 +214,6 @@ a { color: inherit; }
   line-height: 1.5;
   color: var(--muted);
 }
-
-/* ---- Multi-platform download links (hairline list, not cards) ---- */
-.platform-downloads {
-  margin: 1rem 0 0.15rem;
-  max-width: 34rem;
-}
-.platform-downloads__label {
-  margin: 0 0 0.45rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.platform-downloads__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.25rem;
-}
-.platform-link {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
-  padding: 0.35rem 0;
-  color: var(--ink-2);
-  text-decoration: none;
-  font-size: 0.92rem;
-  font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-.platform-link:hover {
-  color: var(--ink);
-  border-bottom-color: var(--accent);
-}
-.platform-link__os { font-weight: 600; color: var(--ink); }
-.platform-link__detail {
-  color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 500;
-}
-.platform-link:hover .platform-link__detail { color: var(--ink-2); }
 
 /* ---- Hero mark: clean, still, no glow ---- */
 .hero__shot {
@@ -456,9 +418,10 @@ a { color: inherit; }
 }
 .release__downloads {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.55rem;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: flex-end;
+  max-width: 22rem;
 }
 .release__downloads-empty {
   margin: 0;
@@ -466,28 +429,9 @@ a { color: inherit; }
   font-size: 0.88rem;
   font-style: italic;
 }
-.release__download {
-  padding: 0.7rem 1.2rem;
-  font-size: 0.92rem;
-}
-.release__platforms {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.35rem 0.9rem;
-}
-.release__platform {
-  color: var(--ink-2);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  border-bottom: 1px solid var(--line-2);
-  padding-bottom: 2px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-.release__platform:hover {
-  color: var(--ink);
-  border-bottom-color: var(--accent);
+.release__downloads .btn--download {
+  padding: 0.65rem 0.95rem;
+  font-size: 0.86rem;
 }
 .release__notes {
   margin: 0;
@@ -584,18 +528,20 @@ a { color: inherit; }
   .nav__links { gap: 1.1rem; }
   .nav__links a { font-size: 0.9rem; }
   .links__in { grid-template-columns: 1fr; gap: 2.25rem; }
-  .actions { gap: 1.1rem; }
+  .actions { gap: 0.9rem; }
+  .dl-row { width: 100%; }
+  .dl-row .btn { flex: 1 1 calc(50% - 0.55rem); }
   .release__actions {
     width: 100%;
     align-items: stretch;
   }
-  .release__downloads { align-items: stretch; }
-  .release__platforms { justify-content: flex-start; }
-  .release__download { width: 100%; text-align: center; }
+  .release__downloads { justify-content: flex-start; max-width: none; width: 100%; }
+  .release__downloads .btn--download { flex: 1 1 calc(50% - 0.45rem); text-align: center; }
 }
 
 @media (max-width: 380px) {
-  .btn { width: 100%; }
+  .dl-row .btn,
+  .release__downloads .btn--download { flex-basis: 100%; }
   .actions { align-items: stretch; }
   .actions__alt { align-self: flex-start; }
 }
