@@ -39,6 +39,9 @@ const PLATFORM_SPECS = [
 
 const BOILERPLATE_PARA_RE =
   /^\s*Auto-built from private source\b[^\n]*(?:\n(?![#\-*]|\d+\.)[^\n]*)*/i;
+// Site already lists assets as download buttons — drop the mirrored Downloads section.
+const DOWNLOADS_SECTION_RE =
+  /^##\s+Downloads\s*\n(?:.*\n)*?(?=^#{1,3}\s|\Z)/im;
 
 document.getElementById("year").textContent = String(new Date().getFullYear());
 
@@ -69,18 +72,16 @@ function formatDate(iso) {
 }
 
 function classifyAssets(assets) {
+  const list = assets || [];
   const found = [];
-  const seen = new Set();
-  for (const asset of assets || []) {
-    if (SIG_RE.test(asset.name) || /^latest\.json$/i.test(asset.name)) continue;
-    for (const spec of PLATFORM_SPECS) {
-      if (seen.has(spec.id)) continue;
-      if (spec.test(asset.name)) {
-        seen.add(spec.id);
-        found.push({ ...spec, asset });
-        break;
-      }
-    }
+  for (const spec of PLATFORM_SPECS) {
+    const asset = list.find(
+      (a) =>
+        !SIG_RE.test(a.name) &&
+        !/^latest\.json$/i.test(a.name) &&
+        spec.test(a.name)
+    );
+    if (asset) found.push({ ...spec, asset });
   }
   return found;
 }
@@ -92,6 +93,8 @@ function cleanReleaseNotes(raw) {
 
   // Drop the leading auto-built boilerplate paragraph when present.
   text = text.replace(BOILERPLATE_PARA_RE, "").replace(/^\s*\n+/, "").trim();
+  // Drop the mirrored Downloads inventory; keep Gatekeeper / real changelog text.
+  text = text.replace(DOWNLOADS_SECTION_RE, "").trim();
   text = text.replace(/\n{3,}/g, "\n\n").trim();
   return text;
 }
@@ -168,18 +171,24 @@ function renderDownloads(classified) {
     return `<p class="release__downloads-empty">No installer assets attached.</p>`;
   }
 
-  const links = classified
-    .map(({ label, short, asset, id }) => {
-      const cls =
-        id === "windows"
-          ? "btn release__download"
-          : "release__platform";
-      const text = id === "windows" ? `Download ${short}` : short;
-      return `<a class="${cls}" href="${escapeHtml(asset.browser_download_url)}" title="${escapeHtml(label)}">${escapeHtml(text)}</a>`;
-    })
+  const windows = classified.find((c) => c.id === "windows");
+  const others = classified.filter((c) => c.id !== "windows");
+
+  const primary = windows
+    ? `<a class="btn release__download" href="${escapeHtml(windows.asset.browser_download_url)}">Download Windows</a>`
+    : "";
+
+  const secondary = others
+    .map(
+      ({ label, short, asset }) =>
+        `<a class="release__platform" href="${escapeHtml(asset.browser_download_url)}" title="${escapeHtml(label)}">${escapeHtml(short)}</a>`
+    )
     .join("");
 
-  return `<div class="release__downloads">${links}</div>`;
+  return `<div class="release__downloads">
+    ${primary}
+    ${secondary ? `<div class="release__platforms">${secondary}</div>` : ""}
+  </div>`;
 }
 
 function renderRelease(release, isLatest) {
