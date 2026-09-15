@@ -1,7 +1,12 @@
 # Refresh old-repo updater handoff (Dylan / whoever has write)
 
-Clients still polling `dylan-griffin/advtage-releases` read **Latest** → `latest.json`.
-That asset is currently frozen at **0.1.24** while org Latest is **0.1.25**.
+Clients still polling `dylan-griffin/advtage-releases` read **Latest** →
+`app-v0.1.24-handoff` → `latest.json`.
+
+**Current gap (2026-09-15):** handoff already reports **version `0.1.25`**, but its
+`notes` field is still **empty**. Org `app-v0.1.25` / `latest.json` now has the
+full Since-v0.1.24 + Gatekeeper notes. Re-clobber so ≤0.1.24 in-app updaters
+see the same markdown.
 
 This Cloud Agent gets `HTTP 403: Resource not accessible by integration` on
 `gh release upload … --clobber` to the handoff release. Run this locally (or from
@@ -15,10 +20,10 @@ curl -fsSL https://github.com/advtage/advtage.github.io/releases/latest/download
 gh release upload app-v0.1.24-handoff --repo dylan-griffin/advtage-releases \
   /tmp/latest.json --clobber && \
 curl -fsSL https://github.com/dylan-griffin/advtage-releases/releases/latest/download/latest.json \
-  | python3 -c "import sys,json; print(json.load(sys.stdin)['version'])"
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['version'], 'notes', len(d.get('notes') or ''))"
 ```
 
-Expected print: `0.1.25` (or whatever org Latest is).
+Expected: `0.1.25 notes 455` (or whatever org Latest is / notes length).
 
 ## Or from this repo
 
@@ -36,7 +41,7 @@ again (avoid conflicting binary uploads):
 
 ```yaml
   refresh-legacy-handoff:
-    needs: publish-org-release   # whatever job uploads to advtage/advtage.github.io
+    needs: publish-org-release   # whatever job uploads to advtage.github.io
     runs-on: ubuntu-latest
     permissions:
       contents: write   # or use a PAT with write on dylan-griffin/advtage-releases
