@@ -33,13 +33,21 @@ Build in the private app repo, then publish installers to **this** repo’s GitH
 
 ### Updater handoff (old installs)
 
-Older apps still poll `dylan-griffin/advtage-releases`. Publish a final handoff release with:
+Older apps still poll `dylan-griffin/advtage-releases` (Latest tag
+`app-v0.1.24-handoff`). After each org release, refresh that handoff’s
+`latest.json` from org Latest:
 
 ```bash
-node scripts/publish-handoff-release.mjs
+# one-liner (needs write on dylan-griffin/advtage-releases)
+curl -fsSL https://github.com/advtage/advtage.github.io/releases/latest/download/latest.json -o /tmp/latest.json \
+  && gh release upload app-v0.1.24-handoff --repo dylan-griffin/advtage-releases /tmp/latest.json --clobber
 ```
 
-**Current blocker (this agent):** creating releases there returns `HTTP 403: Resource not accessible by integration` — read works, write does not. Grant the Cursor GitHub App **write** on `dylan-griffin/advtage-releases` and include it in this Cloud Agent environment, then re-run the script.
+Or: `node scripts/publish-handoff-release.mjs` (creates or refreshes).
+
+**Current blocker (this agent):** asset upload returns
+`HTTP 403: Resource not accessible by integration`. See
+`scripts/HANDOFF-REFRESH.md` for Dylan one-liner + Advtage App `release.yml` hook.
 
 Also point the Tauri updater in private `dylan-griffin/advtage` at:
 
