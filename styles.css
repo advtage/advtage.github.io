@@ -194,6 +194,64 @@ a { color: inherit; }
   color: var(--muted);
   font-size: 0.88rem;
 }
+.fine__link {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.fine__link:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.fine--caveat {
+  margin-top: 0.85rem;
+  max-width: 34rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ---- Multi-platform download links (hairline list, not cards) ---- */
+.platform-downloads {
+  margin: 1rem 0 0.15rem;
+  max-width: 34rem;
+}
+.platform-downloads__label {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.platform-downloads__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+}
+.platform-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.35rem 0;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.platform-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+.platform-link__os { font-weight: 600; color: var(--ink); }
+.platform-link__detail {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+.platform-link:hover .platform-link__detail { color: var(--ink-2); }
 
 /* ---- Hero mark: clean, still, no glow ---- */
 .hero__shot {
@@ -302,6 +360,13 @@ a { color: inherit; }
   font-size: 1.05rem;
   line-height: 1.6;
 }
+.page-head__note {
+  margin: 1rem 0 0;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
 
 .nav__links a[aria-current="page"] {
   color: var(--ink);
@@ -383,24 +448,84 @@ a { color: inherit; }
 }
 .release__actions {
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+  max-width: 100%;
+}
+.release__downloads {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem 0.85rem;
+  align-items: center;
+}
+.release__downloads-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-style: italic;
 }
 .release__download {
   padding: 0.7rem 1.2rem;
   font-size: 0.92rem;
+}
+.release__platform {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.release__platform:hover {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
 }
 .release__notes {
   margin: 0;
   color: var(--ink-2);
   font-size: 0.95rem;
   line-height: 1.6;
-  white-space: pre-wrap;
   max-width: 42rem;
 }
 .release__notes--empty {
   color: var(--muted);
   font-style: italic;
-  white-space: normal;
 }
+.release__notes p {
+  margin: 0 0 0.75rem;
+}
+.release__notes p:last-child { margin-bottom: 0; }
+.release__notes .notes-h {
+  margin: 1.1rem 0 0.45rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.release__notes .notes-h:first-child { margin-top: 0; }
+.release__notes .notes-list {
+  margin: 0 0 0.85rem;
+  padding-left: 1.2rem;
+  color: var(--ink-2);
+}
+.release__notes .notes-list li { margin: 0.25rem 0; }
+.release__notes code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  color: var(--ink);
+}
+.release__notes a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+}
+.release__notes a:hover { border-bottom-color: var(--accent); }
+.release__notes strong { color: var(--ink); font-weight: 650; }
 
 /* ---------------- Footer ---------------- */
 .foot {
@@ -443,8 +568,14 @@ a { color: inherit; }
   .nav__links a { font-size: 0.9rem; }
   .links__in { grid-template-columns: 1fr; gap: 2.25rem; }
   .actions { gap: 1.1rem; }
-  .release__actions { width: 100%; }
-  .release__download { width: 100%; }
+  .release__actions {
+    width: 100%;
+    align-items: stretch;
+  }
+  .release__downloads {
+    justify-content: flex-start;
+  }
+  .release__download { width: 100%; text-align: center; }
 }
 
 @media (max-width: 380px) {
