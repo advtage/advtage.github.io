@@ -540,15 +540,95 @@ a { color: inherit; }
   max-width: 38rem;
 }
 
-/* ---------------- Socials page ---------------- */
-.socials__in {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: clamp(2.5rem, 5vw, 3.5rem) var(--pad);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 6vw, 4rem);
+/* ---------------- Socials / Linktree stack ---------------- */
+.page-socials {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+.page-socials main {
+  flex: 1 1 auto;
+}
+.lt {
+  padding: clamp(2rem, 5vw, 3.25rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+}
+.lt__in {
+  width: min(100%, 26rem);
+  margin: 0 auto;
+}
+.lt__profile {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+.lt__avatar {
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: 0 auto 0.9rem;
+  object-fit: contain;
+}
+.lt__name {
+  margin: 0 0 0.35rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.lt__bio {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.lt__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.lt-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.15rem;
+  background: var(--bg-2);
+  color: var(--ink);
+  border: 2px solid var(--line-2);
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.28);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.lt-btn:hover {
+  background: var(--accent);
+  border-color: #c46b98;
+  color: var(--accent-ink);
+}
+.lt-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+.lt-btn__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+  display: block;
+  fill: currentColor;
+}
+.lt-btn__label {
+  display: block;
+  line-height: 1;
+}
+
+/* legacy two-column socials layout removed in favor of .lt */
 
 /* ---------------- Page head (inner pages) ---------------- */
 .page-head {
@@ -809,7 +889,6 @@ a { color: inherit; }
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }
-  .socials__in { grid-template-columns: 1fr; gap: 2.25rem; }
   .how__mark { opacity: 0.14; width: min(55vw, 220px); }
 }
 
