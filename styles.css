@@ -104,13 +104,13 @@ a { color: inherit; }
   transition: color 0.15s ease;
 }
 .nav__links a:hover { color: var(--ink); }
-.nav-donate {
+.nav-link {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   line-height: 1;
 }
-.nav-donate__icon {
+.nav-link__icon {
   width: 0.95rem;
   height: 0.95rem;
   display: block;
@@ -118,6 +118,7 @@ a { color: inherit; }
   fill: currentColor;
   transform: translateY(-0.5px);
 }
+.nav-link span { line-height: 1; }
 
 /* ---------------- Hero ---------------- */
 .hero {
