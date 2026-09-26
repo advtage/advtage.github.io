@@ -567,6 +567,12 @@ a { color: inherit; }
   margin: 0 auto 0.9rem;
   object-fit: contain;
 }
+.lt__logo {
+  width: 10rem;
+  height: auto;
+  margin: 0 auto 1.25rem;
+  object-fit: contain;
+}
 .lt__name {
   margin: 0 0 0.35rem;
   font-size: 1.45rem;
